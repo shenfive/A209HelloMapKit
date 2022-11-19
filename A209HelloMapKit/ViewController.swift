@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var myMap: MKMapView!
     
     var locationManager = CLLocationManager()
@@ -23,28 +23,16 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         locationManager.requestWhenInUseAuthorization()
-        let xScale:CLLocationDegrees = 0.001
-        let yScale:CLLocationDegrees = 0.001
-        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
+        locationManager.delegate = self
+
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.activityType = .automotiveNavigation
+        locationManager.startUpdatingLocation()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.locationManager.location?.coordinate
-            
-            if let theLocation = self.locationManager.location?.coordinate{
-                let region = MKCoordinateRegion.init(center: theLocation, span: span)
-                self.myMap.setRegion(region, animated: true)
-            }
-        })
+        myMap.userTrackingMode = .followWithHeading
+
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            if let theLocation = self.locationManager.location?.coordinate{
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = theLocation
-                annotation.title = "譯智"
-                annotation.subtitle = "教育訓練中心"
-                self.myMap.addAnnotation(annotation)
-            }
-        })
+
     }
     
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
@@ -73,7 +61,19 @@ class ViewController: UIViewController {
         
     }
     
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let theLocation = locations[0].coordinate
+        
+        let xScale:CLLocationDegrees = 0.005
+        let yScale:CLLocationDegrees = 0.005
+        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
+        
+        
+        let region = MKCoordinateRegion.init(center: theLocation, span: span)
+        self.myMap.setRegion(region, animated: true)
+        
+    }
+
     
     
 }
