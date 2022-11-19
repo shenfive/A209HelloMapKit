@@ -28,14 +28,14 @@ class ViewController: UIViewController {
         let xScale:CLLocationDegrees = 0.001
         let yScale:CLLocationDegrees = 0.001
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
             let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
 
             self.myMap.setRegion(region, animated: true)
         })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
 
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
@@ -61,10 +61,22 @@ class ViewController: UIViewController {
         default:
             break
         }
-        
+    }
+    
+    @IBAction func longPressAction(_ sender: UILongPressGestureRecognizer) {
+        let touchPoint = sender.location(in: myMap)
+        let location = myMap.convert(touchPoint, toCoordinateFrom: myMap)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "自訂"
+        annotation.subtitle = "自訂的座標"
+        self.myMap.addAnnotation(annotation)
         
         
     }
+    
+    
+    
     
 }
 
