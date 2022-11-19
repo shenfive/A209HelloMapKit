@@ -25,6 +25,7 @@
 		BA036406291F99CC00F3B0CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA036408291F99CC00F3B0CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA2D5C6529288279006ACFAB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BA2D5C672928B13A006ACFAB /* 文字轉語音.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "文字轉語音.pptx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 			children = (
 				BA0363FA291F99CB00F3B0CE /* AppDelegate.swift */,
 				BA0363FC291F99CB00F3B0CE /* SceneDelegate.swift */,
+				BA2D5C672928B13A006ACFAB /* 文字轉語音.pptx */,
 				BA0363FE291F99CB00F3B0CE /* ViewController.swift */,
 				BA036400291F99CB00F3B0CE /* Main.storyboard */,
 				BA036403291F99CC00F3B0CE /* Assets.xcassets */,
