@@ -21,6 +21,18 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CzU-iJ-v13">
+                                <rect key="frame" x="60" y="79" width="273" height="32"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.70283269557823125" colorSpace="custom" customColorSpace="sRGB"/>
+                                <segments>
+                                    <segment title="地圖"/>
+                                    <segment title="衛星"/>
+                                    <segment title="混合"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="oQ8-gI-0BR"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -29,6 +41,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vJx-5X-QDc" secondAttribute="trailing" id="Aap-ZY-5Gq"/>
                             <constraint firstItem="vJx-5X-QDc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EjU-Fv-qg6"/>
                             <constraint firstItem="vJx-5X-QDc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PPt-L8-O0E"/>
+                            <constraint firstItem="CzU-iJ-v13" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="hPJ-z0-rTE"/>
+                            <constraint firstItem="CzU-iJ-v13" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="jek-Vm-s9l"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CzU-iJ-v13" secondAttribute="trailing" constant="60" id="mGt-As-FZd"/>
                         </constraints>
                     </view>
                     <connections>
