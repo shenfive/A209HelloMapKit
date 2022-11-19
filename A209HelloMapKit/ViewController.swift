@@ -32,14 +32,8 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
-        
-            
-            
-            if let coordinate = self.locationManager.location?.coordinate{
-                let xScale:CLLocationDegrees = 0.01
-                let yScale:CLLocationDegrees = 0.01
-                let span = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
-                let region = MKCoordinateRegion.init(center: location, span: span)
+            if let theLocation = self.locationManager.location?.coordinate{
+                let region = MKCoordinateRegion.init(center: theLocation, span: span)
                 self.myMap.setRegion(region, animated: true)
             }
 
