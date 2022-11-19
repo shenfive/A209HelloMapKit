@@ -25,9 +25,11 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         let xScale:CLLocationDegrees = 0.001
         let yScale:CLLocationDegrees = 0.001
+        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
+            self.locationManager.location?.coordinate
+            
             if let theLocation = self.locationManager.location?.coordinate{
                 let region = MKCoordinateRegion.init(center: theLocation, span: span)
                 self.myMap.setRegion(region, animated: true)
