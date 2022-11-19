@@ -24,16 +24,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
-
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
         locationManager.startUpdatingLocation()
-        
         myMap.userTrackingMode = .followWithHeading
-
-        
-
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let theLocation = locations[0].coordinate
+        let xScale:CLLocationDegrees = 0.005
+        let yScale:CLLocationDegrees = 0.005
+        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
+        let region = MKCoordinateRegion.init(center: theLocation, span: span)
+        self.myMap.setRegion(region, animated: true)
+        
+    }
+
+    
+    
+    
     
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
@@ -43,7 +52,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             myMap.mapType = .satellite
         case 2:
             myMap.mapType = .hybrid
-            
         default:
             break
         }
@@ -57,24 +65,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         annotation.title = "自訂"
         annotation.subtitle = "自訂的座標"
         self.myMap.addAnnotation(annotation)
-        
-        
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let theLocation = locations[0].coordinate
-        
-        let xScale:CLLocationDegrees = 0.005
-        let yScale:CLLocationDegrees = 0.005
-        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
-        
-        
-        let region = MKCoordinateRegion.init(center: theLocation, span: span)
-        self.myMap.setRegion(region, animated: true)
-        
-    }
 
-    
     
 }
 
