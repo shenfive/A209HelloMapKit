@@ -7,9 +7,12 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class ViewController: UIViewController {
     @IBOutlet weak var myMap: MKMapView!
+    
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +21,8 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        myMap.isScrollEnabled = false
-        myMap.isZoomEnabled = false
         
+        locationManager.requestWhenInUseAuthorization()
         
         let latitude:CLLocationDegrees = 25.044271
         let longitude:CLLocationDegrees = 121.513359
@@ -30,9 +32,20 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
-            let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+        
+            
+            
+            if let coordinate = self.locationManager.location?.coordinate{
+                let xScale:CLLocationDegrees = 0.01
+                let yScale:CLLocationDegrees = 0.01
+                let span = MKCoordinateSpan(latitudeDelta: yScale, longitudeDelta: xScale)
+                let region = MKCoordinateRegion.init(center: location, span: span)
+                self.myMap.setRegion(region, animated: true)
+            }
 
-            self.myMap.setRegion(region, animated: true)
+            
+            
+            
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
