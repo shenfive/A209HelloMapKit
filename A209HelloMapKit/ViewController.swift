@@ -23,10 +23,6 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         locationManager.requestWhenInUseAuthorization()
-        
-        let latitude:CLLocationDegrees = 25.044271
-        let longitude:CLLocationDegrees = 121.513359
-        let location:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         let xScale:CLLocationDegrees = 0.001
         let yScale:CLLocationDegrees = 0.001
         
@@ -36,24 +32,17 @@ class ViewController: UIViewController {
                 let region = MKCoordinateRegion.init(center: theLocation, span: span)
                 self.myMap.setRegion(region, animated: true)
             }
-
-            
-            
-            
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = "譯智"
-            annotation.subtitle = "教育訓練中心"
-            self.myMap.addAnnotation(annotation)
-
+            if let theLocation = self.locationManager.location?.coordinate{
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = theLocation
+                annotation.title = "譯智"
+                annotation.subtitle = "教育訓練中心"
+                self.myMap.addAnnotation(annotation)
+            }
         })
-        
-        
-        
     }
     
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
